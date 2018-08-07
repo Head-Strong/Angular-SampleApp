@@ -1,6 +1,5 @@
 import { Component } from '@angular/core'
 import { Router } from '@angular/router'
-import { fromEvent } from '../../../node_modules/rxjs/observable/fromEvent';
 import { EventService } from './shared';
 
 @Component({
