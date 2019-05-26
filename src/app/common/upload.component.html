@@ -1,0 +1,48 @@
+<div class="holder">
+  <div class="row no-gutters mb-3">
+    <div class="col-sm-12 col-md-12 col-lg-3">
+      <img src="assets/images/fileformat-icon.png" alt="File format image" class="mt-3 ml-4" />
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-9">
+      <p class="ml-1 form-field caps nopad mt-3 ml-4">Upload File:</p>
+      <input class="mt-3 ml-4" type="file" ng2FileSelect [uploader]="uploader" multiple />
+
+      <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+        (fileOver)="fileOverBase($event)" [uploader]="uploader" class="droparea well my-drop-zone ml-4 mt-3">Drop files here        
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="uploader?.queue?.length > 0">
+    <div class="col-sm-10 col-md-10 col-lg-10 mt-3 ml-4">
+      <h6 class="caps">Upload queue</h6>
+      <p>Queue length: {{ uploader?.queue?.length }}</p>
+
+      <table>
+        
+        <tbody>
+          <tr *ngFor="let item of uploader.queue">
+            <td>
+              {{ item?.file?.name }}
+            </td>           
+            <td nowrap>
+                <span class="delete-icon" style="margin-left: 10px;">
+                    <img src="assets/images/Delete-icon.png" (click)="item.remove()" width="15" height="18" alt="Delete Report Icon" /> 
+                </span>
+              <!-- <button type="button" class="btn btn-link redlink " (click)="item.remove()">
+                <span class="glyphicon glyphicon-trash"></span> Remove
+              </button> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <div class="row" *ngIf="uploader?.queue?.length > 0">
+    <div class="col-sm-12 col-md-12 col-lg-12 mt-3 ml-4">
+      <button type="button" class="btn btn-primary caps btn-smalls mb-3" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+        Upload all
+      </button>
+    </div>
+  </div>
+</div>
